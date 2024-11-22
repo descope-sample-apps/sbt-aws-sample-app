@@ -101,7 +101,7 @@ The **SaaS Builder Toolkit (SBT)** is an open-source developer toolkit designed 
    - Codifies SaaS best practices, ensuring scalability and maintainability.
 
 ### 3. **User Management**
-   - Perform CRUD operations on user data via AWS Lambda functions and DynamoDB.
+   - Perform CRUD operations on user data via AWS Lambda functions.
    - Authenticate API requests using JWTs from Descope.
 
 ### 4. **Modern UI Design**
