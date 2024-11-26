@@ -2,6 +2,8 @@
 
 # Descope + AWS SBT Sample App
 
+> **Note**: The `sbt-aws-descope` library can be found on our GitHub page [here](https://github.com/descope/sbt-aws-descope).
+
 This sample app demonstrates how to build a SaaS application using the **Descope authentication platform** and the **AWS SaaS Builder Toolkit (SBT)**. It combines the flexibility of AWS SBT for SaaS best practices with Descope’s seamless authentication to create a robust, developer-friendly solution for modern SaaS applications.
 
 ## 🚀 Features
