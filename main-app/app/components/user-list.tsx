@@ -82,10 +82,10 @@ export function UserList() {
     [loadUsers]
   );
 
-  const handleEditUser = (user: User) => {
-    setCurrentUser(user);
-    setIsEditModalOpen(true);
-  };
+  // const handleEditUser = (user: User) => {
+  //   setCurrentUser(user);
+  //   setIsEditModalOpen(true);
+  // };
 
   const handleDeleteUser = async (userId: string) => {
     await deleteUser(userId);
