@@ -12,7 +12,7 @@ export default function Home() {
   const router = useRouter();
   const [showLogin, setShowLogin] = useState(false);
   const [isFlowReady, setIsFlowReady] = useState(false);
-  const { isAuthenticated, refreshSession } = useSession();
+  const { isAuthenticated } = useSession();
 
   const onReady = () => {
     setIsFlowReady(true);
@@ -20,9 +20,6 @@ export default function Home() {
 
   const onSuccess = async (e: unknown) => {
     console.log("Logged in:", e);
-    if (refreshSession) {
-      await refreshSession();
-    }
     setShowLogin(false);
   };
 

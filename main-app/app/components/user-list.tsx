@@ -11,7 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { UserEditModal } from "./user-edit-modal";
+// import { UserEditModal } from "./user-edit-modal";
 import axios from "axios";
 import { getSessionToken } from "@descope/react-sdk";
 
@@ -31,8 +31,8 @@ interface User {
 
 export function UserList() {
   const [users, setUsers] = useState<User[]>([]);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState<User | null>(null);
+  // const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  // const [currentUser, setCurrentUser] = useState<User | null>(null);
 
   const fetchUsers = useCallback(async () => {
     const token = getSessionToken();
@@ -91,10 +91,10 @@ export function UserList() {
     await deleteUser(userId);
   };
 
-  const handleUserUpdated = () => {
-    setIsEditModalOpen(false);
-    loadUsers();
-  };
+  // const handleUserUpdated = () => {
+  //   setIsEditModalOpen(false);
+  //   loadUsers();
+  // };
 
   return (
     <div>
@@ -130,14 +130,14 @@ export function UserList() {
           ))}
         </TableBody>
       </Table>
-      {currentUser && (
+      {/* {currentUser && (
         <UserEditModal
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
           user={currentUser}
           onUserUpdated={handleUserUpdated}
         />
-      )}
+      )} */}
     </div>
   );
 }
