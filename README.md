@@ -4,8 +4,6 @@
 
 This sample app demonstrates how to build a SaaS application using the **Descope authentication platform** and the **AWS SaaS Builder Toolkit (SBT)**. It combines the flexibility of AWS SBT for SaaS best practices with Descope’s seamless authentication to create a robust, developer-friendly solution for modern SaaS applications.
 
----
-
 ## 🚀 Features
 
 - **Authentication with Descope**: User login, session management, and secure API interactions powered by Descope’s authentication flows.
@@ -13,8 +11,6 @@ This sample app demonstrates how to build a SaaS application using the **Descope
 - **User Management**: Basic CRUD operations for managing user data using AWS resources.
 - **Responsive UI**: Built with React and **shadcn**, offering a polished user experience.
 - **Environment Configurations**: Easy setup with environment variables to integrate both Descope and AWS components.
-
----
 
 ## 🛠️ Setup Instructions
 
@@ -34,8 +30,6 @@ This sample app demonstrates how to build a SaaS application using the **Descope
 2. **Create a New Project**:
    - Navigate to the **Project Settings** section, and copy the **Project ID** displayed in the project settings; you'll need it later.
 
----
-
 ### Step 2: Generate a Descope Management Key
 
 1. **Go to Management Keys**:
@@ -51,8 +45,6 @@ This sample app demonstrates how to build a SaaS application using the **Descope
        --value "<your-management-key>" \
        --type "SecureString"
      ```
-
----
 
 ### Step 3: Update Your CDK Code
 
@@ -88,8 +80,6 @@ export class ControlPlaneStack extends Stack {
 }
 ```
 
----
-
 ### Backend Setup (AWS SBT)
 
 1. **Clone the Repository**:
@@ -118,8 +108,6 @@ export class ControlPlaneStack extends Stack {
    ```
 
 5. Save the **API Gateway URL** from the output for later use.
-
----
 
 ### Frontend Setup (Next App)
 
@@ -154,41 +142,13 @@ export class ControlPlaneStack extends Stack {
 
 ---
 
-## 🌟 Use Cases
-
-### 1. **Authentication with Descope**
-
-- Easy-to-configure login flows and session management.
-- Securely integrates with the backend to handle authenticated requests.
-
-### 2. **SaaS Resource Management**
-
-- Built using AWS SBT, which simplifies implementing control plane and application plane services.
-- Codifies SaaS best practices, ensuring scalability and maintainability.
-
-### 3. **User Management**
-
-- Perform CRUD operations on user data via AWS Lambda functions.
-- Authenticate API requests using JWTs from Descope.
-
-### 4. **Modern UI Design**
-
-- Built with **shadcn** for a sleek, responsive design.
-- Optimized for a professional user experience.
-
----
-
 ## 🤝 Contributing
 
 We welcome contributions! Please fork the repository, make your changes, and open a pull request.
 
----
-
 ## 📄 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
 
 ## 📧 Support
 
