@@ -11,12 +11,23 @@ import { UserCog, Key, BarChart } from "lucide-react";
 export default function Home() {
   const router = useRouter();
   const [showLogin, setShowLogin] = useState(false);
-  const { isAuthenticated } = useSession();
-
   const [isFlowReady, setIsFlowReady] = useState(false);
+  const { isAuthenticated, refreshSession } = useSession();
 
   const onReady = () => {
     setIsFlowReady(true);
+  };
+
+  const onSuccess = async (e: unknown) => {
+    console.log("Logged in:", e);
+    if (refreshSession) {
+      await refreshSession();
+    }
+    setShowLogin(false);
+  };
+
+  const onError = (e: unknown) => {
+    console.error("Login error:", e);
   };
 
   return (
@@ -31,8 +42,8 @@ export default function Home() {
           SBT (AWS) + Descope Integration
         </h1>
         <p className="text-xl text-blue-100 max-w-2xl mx-auto">
-          This is a sample app that you can use to showcase the SBT built-in
-          functions for JWT session user management.
+          Sample app showcasing the SBT built-in functions for JWT session user
+          management.
         </p>
       </motion.div>
 
@@ -46,7 +57,7 @@ export default function Home() {
           <Button
             size="lg"
             onClick={() => setShowLogin(true)}
-            className="bg-white text-blue-700 hover:bg-blue-100 transition-colors"
+            className="bg-white text-blue-700 hover:bg-blue-100"
           >
             Login with Descope
           </Button>
@@ -55,70 +66,61 @@ export default function Home() {
           <Button
             size="lg"
             onClick={() => router.push("/dashboard")}
-            className="bg-white text-blue-700 hover:bg-blue-100 transition-colors"
+            className="bg-white text-blue-700 hover:bg-blue-100"
           >
             Go To Dashboard
           </Button>
         )}
       </motion.div>
 
-      {showLogin && (
+      {/* Descope Flow Component, Always Rendered */}
+      <div
+        className={`fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 ${
+          showLogin ? "visible" : "hidden"
+        }`}
+      >
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ scale: 0.9 }}
+          animate={{ scale: showLogin ? 1 : 0.9 }}
           transition={{ duration: 0.3 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          onClick={() => setShowLogin(false)}
+          className="bg-white rounded-lg p-4 max-w-md w-full max-h-[90vh] overflow-y-auto relative"
+          onClick={(e) => e.stopPropagation()}
         >
-          <motion.div
-            initial={{ scale: 0.9 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.3 }}
-            className="bg-white rounded-lg p-4 max-w-md w-full max-h-[90vh] overflow-y-auto relative"
-            onClick={(e) => e.stopPropagation()}
+          <button
+            onClick={() => setShowLogin(false)}
+            className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
           >
-            <button
-              onClick={() => setShowLogin(false)}
-              className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 p-2 z-50"
-              aria-label="Close"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-            {!isFlowReady && (
-              <div className="flex justify-center items-center h-32">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-700"></div>
-              </div>
-            )}
-            <div className={`relative ${isFlowReady ? "block" : "hidden"}`}>
-              <Descope
-                flowId={
-                  process.env.NEXT_PUBLIC_DESCOPE_FLOW_ID || "sign-up-or-in"
-                }
-                onReady={onReady}
-                onSuccess={(e: unknown) => {
-                  console.log("Logged in:", e);
-                  setShowLogin(false);
-                }}
-                redirectOnSuccess="/dashboard"
-                onError={(e: unknown) => console.error("Login error:", e)}
-              />
+            ✕
+          </button>
+          {!isFlowReady && (
+            <div className="flex justify-center items-center h-32">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-700"></div>
             </div>
-          </motion.div>
+          )}
+          <div className={`${isFlowReady ? "block" : "hidden"}`}>
+            <Descope
+              flowId={
+                process.env.NEXT_PUBLIC_DESCOPE_FLOW_ID || "sign-up-or-in"
+              }
+              onReady={onReady}
+              onSuccess={onSuccess}
+              onError={onError}
+              redirectOnSuccess={false} // Handle redirection manually
+            />
+          </div>
         </motion.div>
-      )}
+      </div>
+
+      {/* Static Placement of Descope Flow */}
+      <div className="hidden">
+        <Descope
+          flowId={process.env.NEXT_PUBLIC_DESCOPE_FLOW_ID || "sign-up-or-in"}
+          onReady={onReady}
+          onSuccess={onSuccess}
+          onError={onError}
+          redirectOnSuccess={false} // Handle redirection manually
+        />
+      </div>
 
       <motion.div
         initial={{ opacity: 0 }}

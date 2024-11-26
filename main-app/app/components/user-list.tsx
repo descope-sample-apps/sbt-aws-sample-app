@@ -36,6 +36,7 @@ export function UserList() {
 
   const fetchUsers = useCallback(async () => {
     const token = getSessionToken();
+    console.log(token);
     const response = await axios.get(
       `${process.env.NEXT_PUBLIC_AWS_URL}/users`,
       {
@@ -43,7 +44,9 @@ export function UserList() {
       }
     );
 
-    const usersData = response.data.users.map((user: any) => ({
+    console.log("API Response:", response);
+
+    const usersData = response.data.data.users.map((user: any) => ({
       id: user.userId,
       name: user.name,
       email: user.email,
@@ -109,13 +112,13 @@ export function UserList() {
               <TableCell>{user.name}</TableCell>
               <TableCell>{user.email}</TableCell>
               <TableCell>
-                <Button
+                {/* <Button
                   variant="outline"
                   className="mr-2"
                   onClick={() => handleEditUser(user)}
                 >
                   Edit
-                </Button>
+                </Button> */}
                 <Button
                   variant="destructive"
                   onClick={() => handleDeleteUser(user.loginIds[0])}
