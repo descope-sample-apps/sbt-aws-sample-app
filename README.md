@@ -21,6 +21,44 @@ This sample app demonstrates how to build a SaaS application using the **Descope
 - **Node.js**: Version ≥ 14.15.0
 - **AWS CLI**: Installed and configured
 - **CDK**: Installed globally
+- **Descope Account**: [Sign up here](https://www.descope.com/sign-up)
+- **SBT Developer Guide**: Familiarize yourself with [SBT Developer Guide](https://aws.amazon.com/saas/sbt-developer-guide/).
+
+---
+
+### **What is the SaaS Builder Toolkit (SBT)?**
+
+The **SaaS Builder Toolkit (SBT)** is an open-source developer toolkit designed to help you implement SaaS best practices and increase developer velocity. Built on top of the AWS Cloud Development Kit (CDK), SBT provides high-level abstractions and reusable infrastructure constructs that encapsulate SaaS principles.
+
+---
+
+Here’s the updated README with the new instructions added for creating a Descope project, configuring a Descope Management Key, and setting up the project ID in the CDK code.
+
+---
+
+# Descope + AWS SBT Sample App
+
+This sample app demonstrates how to build a SaaS application using the **Descope authentication platform** and the **AWS SaaS Builder Toolkit (SBT)**. It combines the flexibility of AWS SBT for SaaS best practices with Descope’s seamless authentication to create a robust, developer-friendly solution for modern SaaS applications.
+
+---
+
+## 🚀 Features
+
+- **Authentication with Descope**: User login, session management, and secure API interactions powered by Descope’s authentication flows.
+- **AWS SaaS Integration**: Leverages AWS SBT to implement SaaS best practices in the application’s control plane and user management services.
+- **User Management**: Basic CRUD operations for managing user data using AWS resources.
+- **Responsive UI**: Built with React and **shadcn**, offering a polished user experience.
+- **Environment Configurations**: Easy setup with environment variables to integrate both Descope and AWS components.
+
+---
+
+## 🛠️ Setup Instructions
+
+### Prerequisites
+
+- **Node.js**: Version ≥ 14.15.0
+- **AWS CLI**: Installed and configured
+- **CDK**: Installed globally
 - **Descope Account**: [Sign up here](https://www.descope.com/)
 - **SBT Developer Guide**: Familiarize yourself with [SBT Developer Guide](https://aws.amazon.com/saas/sbt-developer-guide/).
 
@@ -32,15 +70,79 @@ The **SaaS Builder Toolkit (SBT)** is an open-source developer toolkit designed 
 
 ---
 
+### Step 1: Create a Descope Project
+
+1. **Log into the Descope Console**: Visit [Descope Console](https://app.descope.com/) and log in or create an account.
+2. **Create a New Project**:
+   - Navigate to the **Project Settings** section, and copy the **Project ID** displayed in the project settings; you'll need it later.
+
+---
+
+### Step 2: Generate a Descope Management Key
+
+1. **Go to Management Keys**:
+   - In the Descope Console, go to **Company → Management Keys**.
+2. **Create a New Key**:
+   - Click on **Create Key** and provide a name for the key (e.g., `SBT Management Key`).
+   - Copy the key value securely. **You won’t be able to retrieve it again.**
+3. **Store the Key in AWS Parameter Store**:
+   - Use the AWS CLI to save the management key as an SSM parameter:
+     ```bash
+     aws ssm put-parameter \
+       --name "/descope/management_key" \
+       --value "<your-management-key>" \
+       --type "SecureString"
+     ```
+
+---
+
+### Step 3: Update Your CDK Code
+
+In your CDK code under `control-plane.ts`, set up the `DescopeAuth` construct with your **Project ID** and the SSM parameter path for the management key.
+
+Example (in `ControlPlaneStack.ts`):
+
+```typescript
+import * as sbt from "@cdklabs/sbt-aws";
+import { Stack } from "aws-cdk-lib";
+import { Construct } from "constructs";
+import { DescopeAuth } from "sbt-aws-descope";
+
+export class ControlPlaneStack extends Stack {
+  public readonly regApiGatewayUrl: string;
+  public readonly eventManager: sbt.IEventManager;
+
+  constructor(scope: Construct, id: string, props?: any) {
+    super(scope, id, props);
+    const descopeAuth = new DescopeAuth(this, "DescopeAuth", {
+      projectId: "<Your-Project-ID>", // Replace this with your Project ID
+      clientSecretSSMMgmtKey: "/descope/management_key", // Ensure the SSM parameter is set up
+    });
+
+    const controlPlane = new sbt.ControlPlane(this, "ControlPlane", {
+      auth: descopeAuth,
+      systemAdminEmail: "<Your-Email>", // Replace this with your Email
+    });
+
+    this.eventManager = controlPlane.eventManager;
+    this.regApiGatewayUrl = controlPlane.controlPlaneAPIGatewayUrl;
+  }
+}
+```
+
+---
+
 ### Backend Setup (AWS SBT)
 
 1. **Clone the Repository**:
+
    ```bash
    git clone https://github.com/descope-sample-apps/aws-sbt-sample-app
    cd aws-descope-sbt-sample/cdk-example
    ```
 
 2. **Install Dependencies**:
+
    ```bash
    npm install
    ```
@@ -52,6 +154,7 @@ The **SaaS Builder Toolkit (SBT)** is an open-source developer toolkit designed 
    Update the CDK stack to use AWS SBT constructs for SaaS resource provisioning.
 
 4. **Deploy CDK Stack**:
+
    ```bash
    cdk deploy
    ```
@@ -63,17 +166,20 @@ The **SaaS Builder Toolkit (SBT)** is an open-source developer toolkit designed 
 ### Frontend Setup (Next App)
 
 1. **Navigate to the Frontend Directory**:
+
    ```bash
    cd ../main-app
    ```
 
 2. **Install Dependencies**:
+
    ```bash
    npm install
    ```
 
 3. **Configure Environment Variables**:
    Create a copy of the `.env.local.example` file and add the following:
+
    ```env
    # DESCOPE ENV VARIABLES
    NEXT_PUBLIC_DESCOPE_PROJECT_ID="<Your Descope Project ID>"
@@ -93,20 +199,24 @@ The **SaaS Builder Toolkit (SBT)** is an open-source developer toolkit designed 
 ## 🌟 Use Cases
 
 ### 1. **Authentication with Descope**
-   - Easy-to-configure login flows and session management.
-   - Securely integrates with the backend to handle authenticated requests.
+
+- Easy-to-configure login flows and session management.
+- Securely integrates with the backend to handle authenticated requests.
 
 ### 2. **SaaS Resource Management**
-   - Built using AWS SBT, which simplifies implementing control plane and application plane services.
-   - Codifies SaaS best practices, ensuring scalability and maintainability.
+
+- Built using AWS SBT, which simplifies implementing control plane and application plane services.
+- Codifies SaaS best practices, ensuring scalability and maintainability.
 
 ### 3. **User Management**
-   - Perform CRUD operations on user data via AWS Lambda functions.
-   - Authenticate API requests using JWTs from Descope.
+
+- Perform CRUD operations on user data via AWS Lambda functions.
+- Authenticate API requests using JWTs from Descope.
 
 ### 4. **Modern UI Design**
-   - Built with **shadcn** for a sleek, responsive design.
-   - Optimized for a professional user experience.
+
+- Built with **shadcn** for a sleek, responsive design.
+- Optimized for a professional user experience.
 
 ---
 

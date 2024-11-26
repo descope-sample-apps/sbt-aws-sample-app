@@ -16,7 +16,7 @@ export class ControlPlaneStack extends Stack {
 
     const controlPlane = new sbt.ControlPlane(this, "ControlPlane", {
       auth: descopeAuth,
-      systemAdminEmail: "kevin@descope.com",
+      systemAdminEmail: "support@descope.com",
     });
 
     this.eventManager = controlPlane.eventManager;

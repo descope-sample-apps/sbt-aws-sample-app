@@ -1,5 +1,7 @@
-import { Header } from '../components/header'
-import { UserList } from '../components/user-list'
+"use client";
+
+import { Header } from "../components/header";
+import { UserList } from "../components/user-list";
 
 export default function Dashboard() {
   return (
@@ -11,6 +13,5 @@ export default function Dashboard() {
         </div>
       </main>
     </div>
-  )
+  );
 }
-
