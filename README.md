@@ -1,40 +1,4 @@
-# Descope + AWS SBT Sample App
-
-This sample app demonstrates how to build a SaaS application using the **Descope authentication platform** and the **AWS SaaS Builder Toolkit (SBT)**. It combines the flexibility of AWS SBT for SaaS best practices with Descope’s seamless authentication to create a robust, developer-friendly solution for modern SaaS applications.
-
----
-
-## 🚀 Features
-
-- **Authentication with Descope**: User login, session management, and secure API interactions powered by Descope’s authentication flows.
-- **AWS SaaS Integration**: Leverages AWS SBT to implement SaaS best practices in the application’s control plane and user management services.
-- **User Management**: Basic CRUD operations for managing user data using AWS resources.
-- **Responsive UI**: Built with React and **shadcn**, offering a polished user experience.
-- **Environment Configurations**: Easy setup with environment variables to integrate both Descope and AWS components.
-
----
-
-## 🛠️ Setup Instructions
-
-### Prerequisites
-
-- **Node.js**: Version ≥ 14.15.0
-- **AWS CLI**: Installed and configured
-- **CDK**: Installed globally
-- **Descope Account**: [Sign up here](https://www.descope.com/sign-up)
-- **SBT Developer Guide**: Familiarize yourself with [SBT Developer Guide](https://aws.amazon.com/saas/sbt-developer-guide/).
-
----
-
-### **What is the SaaS Builder Toolkit (SBT)?**
-
-The **SaaS Builder Toolkit (SBT)** is an open-source developer toolkit designed to help you implement SaaS best practices and increase developer velocity. Built on top of the AWS Cloud Development Kit (CDK), SBT provides high-level abstractions and reusable infrastructure constructs that encapsulate SaaS principles.
-
----
-
-Here’s the updated README with the new instructions added for creating a Descope project, configuring a Descope Management Key, and setting up the project ID in the CDK code.
-
----
+<img width="1400" alt="Screenshot 2024-11-26 at 10 12 51 AM" src="https://github.com/user-attachments/assets/3805b0b5-f43b-48d0-9b39-8616df983499">
 
 # Descope + AWS SBT Sample App
 
@@ -61,12 +25,6 @@ This sample app demonstrates how to build a SaaS application using the **Descope
 - **CDK**: Installed globally
 - **Descope Account**: [Sign up here](https://www.descope.com/)
 - **SBT Developer Guide**: Familiarize yourself with [SBT Developer Guide](https://aws.amazon.com/saas/sbt-developer-guide/).
-
----
-
-### **What is the SaaS Builder Toolkit (SBT)?**
-
-The **SaaS Builder Toolkit (SBT)** is an open-source developer toolkit designed to help you implement SaaS best practices and increase developer velocity. Built on top of the AWS Cloud Development Kit (CDK), SBT provides high-level abstractions and reusable infrastructure constructs that encapsulate SaaS principles.
 
 ---
 
