@@ -22,7 +22,7 @@ This sample app demonstrates how to build a SaaS application using the **Descope
 - **AWS CLI**: Installed and configured
 - **CDK**: Installed globally
 - **Descope Account**: [Sign up here](https://www.descope.com/)
-- **SBT Developer Guide**: Familiarize yourself with [SBT Developer Guide](https://aws.amazon.com/saas/sbt-developer-guide/).
+- **SBT Developer Guide**: Familiarize yourself with [SBT Developer Guide](https://github.com/awslabs/sbt-aws/blob/main/docs/public/README.md).
 
 ---
 
