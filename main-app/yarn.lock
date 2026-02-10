@@ -2415,10 +2415,10 @@ lru-cache@^10.2.0:
   resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-10.4.3.tgz"
   integrity sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==
 
-lucide-react@^0.460.0:
-  version "0.460.0"
-  resolved "https://registry.npmjs.org/lucide-react/-/lucide-react-0.460.0.tgz"
-  integrity sha512-BVtq/DykVeIvRTJvRAgCsOwaGL8Un3Bxh8MbDxMhEWlZay3T4IpEKDEpwt5KZ0KJMHzgm6jrltxlT5eXOWXDHg==
+lucide-react@^0.563.0:
+  version "0.563.0"
+  resolved "https://registry.npmjs.org/lucide-react/-/lucide-react-0.563.0.tgz"
+  integrity sha512-8dXPB2GI4dI8jV4MgUDGBeLdGk8ekfqVZ0BdLcrRzocGgG75ltNEmWS+gE7uokKF/0oSUuczNDT+g9hFJ23FkA==
 
 math-intrinsics@^1.1.0:
   version "1.1.0"
