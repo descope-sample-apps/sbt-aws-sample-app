@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@cdklabs/sbt-aws": "^0.5.7",
-    "aws-cdk-lib": "2.164.1",
+    "aws-cdk-lib": "2.189.0",
     "constructs": "^10.0.0",
     "remove": "^0.1.5",
     "sbt-aws-descope": "^1.0.4",
