@@ -25,7 +25,7 @@
     "constructs": "^10.0.0",
     "remove": "^0.1.5",
     "sbt-aws-descope": "^1.0.4",
-    "sbt-aws-moesif": "^0.1.2",
+    "sbt-aws-moesif": "^0.2.0",
     "source-map-support": "^0.5.21"
   }
 }
